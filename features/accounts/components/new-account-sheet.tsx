@@ -1,10 +1,10 @@
 import * as z from "zod";
 
+import { insertAccountSchema } from "@/db/schema";
+
 import { useCreateAccount } from "@/features/accounts/api/use-create-account";
 import { AccountForm } from "@/features/accounts/components/account-form";
 import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
-
-import { insertAccountSchema } from "@/db/schema";
 
 import {
 	Sheet,

@@ -1,10 +1,11 @@
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 import { zValidator } from "@hono/zod-validator";
 import { Hono } from "hono";
+import * as z from "zod";
 
 import { db } from "@/db/drizzle";
 import { accounts, insertAccountSchema } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 
 import { createId } from "@paralleldrive/cuid2";
 
@@ -15,7 +16,6 @@ const app = new Hono()
 
 		if (!auth?.userId) {
 			const responseTimeMs = Date.now() - start;
-
 			return c.json(
 				{
 					error: {
@@ -44,7 +44,7 @@ const app = new Hono()
 			);
 		}
 
-		const data_accounts = await db
+		const data = await db
 			.select({
 				id: accounts.id,
 				name: accounts.name,
@@ -52,17 +52,8 @@ const app = new Hono()
 			.from(accounts)
 			.where(eq(accounts.userId, auth.userId));
 
-		const responseTimeMs = Date.now() - start;
-
 		return c.json({
-			data: {
-				data_accounts,
-				metadata: {
-					request_id: createId(),
-					response_time_ms: responseTimeMs,
-					api_version: "1.0.0",
-				},
-			},
+			data,
 			status: "success",
 			success: true,
 		});
@@ -130,6 +121,65 @@ const app = new Hono()
 				},
 				200,
 			);
+		},
+	)
+	.post(
+		"/bulk-delete",
+		clerkMiddleware(),
+		zValidator(
+			"json",
+			z.object({
+				ids: z.array(z.string()),
+			}),
+		),
+		async (c) => {
+			const start = Date.now();
+			const auth = getAuth(c);
+
+			const values = c.req.valid("json");
+
+			if (!auth?.userId) {
+				const responseTimeMs = Date.now() - start;
+
+				return c.json(
+					{
+						error: {
+							code: 401,
+							message:
+								"Unauthorized: Access is denied due to invalid credentials.",
+							details:
+								"You must provide valid authentication credentials to access this resource. Ensure that your API key or access token is included and correct.",
+							suggestions: [
+								"Verify that your API key or access token is correctly included in the request headers.",
+								"Refer to the authentication section in our API documentation for more details.",
+								"If you continue to experience issues, please contact support at support@example.com.",
+							],
+							error_id: "unauthorized-401",
+							timestamp: new Date().toISOString(),
+						},
+						status: "error",
+						success: false,
+						metadata: {
+							request_id: createId(),
+							response_time_ms: responseTimeMs,
+							api_version: "1.0.0",
+						},
+					},
+					401,
+				);
+			}
+
+			const data = await db
+				.delete(accounts)
+				.where(
+					and(
+						eq(accounts.userId, auth.userId),
+						inArray(accounts.id, values.ids),
+					),
+				)
+				.returning({ id: accounts.id });
+
+			return c.json({ data, status: "success", success: true });
 		},
 	);
 
