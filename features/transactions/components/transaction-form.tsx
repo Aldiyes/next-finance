@@ -3,7 +3,7 @@ import { Trash } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { insertAccountSchema, insertTransactionSchema } from "@/db/schema";
+import { insertTransactionSchema } from "@/db/schema";
 
 import { AmountInput } from "@/components/amout-input";
 import { DatePicker } from "@/components/date-picker";
@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { convertAmountToMilliunits } from "@/lib/utils";
 
 const formSchema = z.object({
 	date: z.coerce.date(),
@@ -66,9 +65,8 @@ export const TransactionForm = ({
 
 	const handleSubmit = (values: FormValues) => {
 		const amount = parseFloat(values.amount);
-		const amountInMilliunits = convertAmountToMilliunits(amount);
 
-		onSubmit({ ...values, amount: amountInMilliunits });
+		onSubmit({ ...values, amount: amount });
 	};
 
 	const handleDelete = () => {
