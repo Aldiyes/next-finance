@@ -293,6 +293,68 @@ const app = new Hono()
 		},
 	)
 	.post(
+		"/bulk-create",
+		clerkMiddleware(),
+		zValidator(
+			"json",
+			z.array(
+				insertTransactionSchema.omit({
+					id: true,
+				}),
+			),
+		),
+		async (c) => {
+			const start = Date.now();
+
+			const auth = getAuth(c);
+
+			if (!auth?.userId) {
+				const responseTimeMs = Date.now() - start;
+
+				return c.json(
+					{
+						error: {
+							code: 401,
+							message:
+								"Unauthorized: Access is denied due to invalid credentials.",
+							details:
+								"You must provide valid authentication credentials to access this resource. Ensure that your API key or access token is included and correct.",
+							suggestions: [
+								"Verify that your API key or access token is correctly included in the request headers.",
+								"Refer to the authentication section in our API documentation for more details.",
+								"If you continue to experience issues, please contact support at aldiyes17032002@gmail.com.",
+							],
+							error_id: "unauthorized-401",
+							timestamp: new Date().toISOString(),
+						},
+						status: "error",
+						success: false,
+						metadata: {
+							request_id: createId(),
+							response_time_ms: responseTimeMs,
+							api_version: "1.0.0",
+						},
+					},
+					401,
+				);
+			}
+
+			const values = c.req.valid("json");
+
+			const data = await db
+				.insert(transactions)
+				.values(
+					values.map((value) => ({
+						id: createId(),
+						...value,
+					})),
+				)
+				.returning();
+
+			return c.json({ data, status: "success", success: true });
+		},
+	)
+	.post(
 		"/bulk-delete",
 		clerkMiddleware(),
 		zValidator(
