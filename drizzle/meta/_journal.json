@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1719611346342,
-      "tag": "0000_married_leper_queen",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1719645266706,
-      "tag": "0001_zippy_phil_sheldon",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1719744822612,
-      "tag": "0002_living_squadron_sinister",
+      "when": 1719757338096,
+      "tag": "0000_glamorous_young_avengers",
       "breakpoints": true
     }
   ]
