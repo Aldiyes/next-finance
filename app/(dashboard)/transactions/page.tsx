@@ -2,7 +2,12 @@
 
 import { Loader, Plus } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
+import { transactions as transactionsSchema } from "@/db/schema";
+
+import { useSelectAccount } from "@/features/accounts/hooks/use-select-account";
+import { useBulkCreateTransactions } from "@/features/transactions/api/use-bulk-create-transactions";
 import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-delete-transactions";
 import { useGetTransactions } from "@/features/transactions/api/use-get-transactions";
 import { useNewTransaction } from "@/features/transactions/hooks/use-new-transaction";
@@ -29,6 +34,8 @@ const INITIAL_IMPORT_RESULT = {
 export default function TransactionsPage() {
 	const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
 	const [importResult, setImportResult] = useState(INITIAL_IMPORT_RESULT);
+	const [AccountDialog, confirm] = useSelectAccount();
+	const createTransactions = useBulkCreateTransactions();
 	const newTransaction = useNewTransaction();
 	const deleteTransactions = useBulkDeleteTransactions();
 	const transactionsQuery = useGetTransactions();
@@ -65,17 +72,39 @@ export default function TransactionsPage() {
 		setVariant(VARIANTS.LIST);
 	};
 
+	const onSubmitImport = async (
+		values: (typeof transactionsSchema.$inferInsert)[],
+	) => {
+		const accountId = await confirm();
+		if (!accountId) {
+			return toast.error("Please select an account to continue");
+		}
+
+		const data = values.map((value) => ({
+			...value,
+			accountId: accountId as string,
+		}));
+
+		createTransactions.mutate(data, {
+			onSuccess: () => {
+				onCancleImport();
+			},
+		});
+	};
+
 	if (variant === VARIANTS.IMPORT) {
 		return (
 			<>
+				<AccountDialog />
 				<ImportCard
 					data={importResult.data}
 					onCancle={onCancleImport}
-					onSubmit={() => {}}
+					onSubmit={onSubmitImport}
 				/>
 			</>
 		);
 	}
+
 	return (
 		<div className="mx-auto -mt-24 w-full max-w-screen-xl pb-10">
 			<Card className="border-none drop-shadow-sm">
