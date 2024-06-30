@@ -27,7 +27,7 @@ const app = new Hono()
 						suggestions: [
 							"Verify that your API key or access token is correctly included in the request headers.",
 							"Refer to the authentication section in our API documentation for more details.",
-							"If you continue to experience issues, please contact support at support@example.com.",
+							"If you continue to experience issues, please contact support at aldiyes17032002@gmail.com.",
 						],
 						error_id: "unauthorized-401",
 						timestamp: new Date().toISOString(),
@@ -84,7 +84,7 @@ const app = new Hono()
 							suggestions: [
 								"Verify that your API key or access token is correctly included in the request headers.",
 								"Refer to the authentication section in our API documentation for more details.",
-								"If you continue to experience issues, please contact support at support@example.com.",
+								"If you continue to experience issues, please contact support at aldiyes17032002@gmail.com.",
 							],
 							error_id: "unauthorized-401",
 							timestamp: new Date().toISOString(),
@@ -115,7 +115,7 @@ const app = new Hono()
 							suggestions: [
 								"Ensure that the 'id' parameter is included in your request.",
 								"Refer to the parameters section in our API documentation for more details.",
-								"If you continue to experience issues, please contact support at support@example.com.",
+								"If you continue to experience issues, please contact support at aldiyes17032002@gmail.com.",
 							],
 							error_id: "missing-id-400",
 							timestamp: new Date().toISOString(),
@@ -153,7 +153,7 @@ const app = new Hono()
 								"Verify that the 'id' parameter is correct.",
 								"Ensure that you have the necessary permissions to access this account.",
 								"Refer to the resource section in our API documentation for more details.",
-								"If you continue to experience issues, please contact support at support@example.com.",
+								"If you continue to experience issues, please contact support at aldiyes17032002@gmail.com.",
 							],
 							error_id: "not-found-404",
 							timestamp: new Date().toISOString(),
@@ -202,7 +202,7 @@ const app = new Hono()
 							suggestions: [
 								"Verify that your API key or access token is correctly included in the request headers.",
 								"Refer to the authentication section in our API documentation for more details.",
-								"If you continue to experience issues, please contact support at support@example.com.",
+								"If you continue to experience issues, please contact support at aldiyes17032002@gmail.com.",
 							],
 							error_id: "unauthorized-401",
 							timestamp: new Date().toISOString(),
@@ -267,7 +267,7 @@ const app = new Hono()
 							suggestions: [
 								"Verify that your API key or access token is correctly included in the request headers.",
 								"Refer to the authentication section in our API documentation for more details.",
-								"If you continue to experience issues, please contact support at support@example.com.",
+								"If you continue to experience issues, please contact support at aldiyes17032002@gmail.com.",
 							],
 							error_id: "unauthorized-401",
 							timestamp: new Date().toISOString(),
