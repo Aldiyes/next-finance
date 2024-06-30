@@ -52,7 +52,7 @@ export default function TransactionsPage() {
 				</CardHeader>
 				<CardContent>
 					<DataTable
-						filterKey="date"
+						filterKey="payee"
 						columns={columns}
 						data={transactions}
 						onDelete={(row) => {
