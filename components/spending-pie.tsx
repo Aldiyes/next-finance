@@ -2,6 +2,7 @@ import { FileSearch, PieChart, Radar, Target } from "lucide-react";
 import { useState } from "react";
 
 import { PieVariant } from "@/components/pie-variant";
+import { RadarVariant } from "@/components/radar-variant";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Select,
@@ -64,7 +65,10 @@ export const SpendingPie = ({ data = [] }: Props) => {
 						</p>
 					</div>
 				) : (
-					<>{chartType === "pie" && <PieVariant data={data} />}</>
+					<>
+						{chartType === "pie" && <PieVariant data={data} />}
+						{chartType === "radar" && <RadarVariant data={data} />}
+					</>
 				)}
 			</CardContent>
 		</Card>
