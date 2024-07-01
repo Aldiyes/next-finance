@@ -8,7 +8,7 @@ import {
 	XAxis,
 } from "recharts";
 
-import { CustomTooltip } from "@/components/custom-tooltip";
+import { CustomTooltip } from "@/components/charts/custom-tooltip";
 
 type Props = {
 	data: {

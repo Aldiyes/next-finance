@@ -1,9 +1,9 @@
 import { FileSearch, Loader, PieChart, Radar, Target } from "lucide-react";
 import { useState } from "react";
 
-import { PieVariant } from "@/components/pie-variant";
-import { RadarVariant } from "@/components/radar-variant";
-import { RadialVariant } from "@/components/radial-variant";
+import { PieVariant } from "@/components/charts/pie-variant";
+import { RadarVariant } from "@/components/charts/radar-variant";
+import { RadialVariant } from "@/components/charts/radial-variant";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Select,

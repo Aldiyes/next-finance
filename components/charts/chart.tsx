@@ -7,9 +7,9 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-import { AreaVariant } from "@/components/area-variant";
-import { BarVariant } from "@/components/bar-variant";
-import { LineVariant } from "@/components/line-variant";
+import { AreaVariant } from "@/components/charts/area-variant";
+import { BarVariant } from "@/components/charts/bar-variant";
+import { LineVariant } from "@/components/charts/line-variant";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Select,

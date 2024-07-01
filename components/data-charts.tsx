@@ -2,8 +2,8 @@
 
 import { useGetSummary } from "@/features/summary/api/use-get-summary";
 
-import { Chart } from "@/components/chart";
-import { SpendingPie } from "@/components/spending-pie";
+import { Chart } from "@/components/charts/chart";
+import { SpendingPie } from "@/components/charts/spending-pie";
 
 export const DataCharts = () => {
 	const { data, isLoading } = useGetSummary();

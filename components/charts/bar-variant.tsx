@@ -1,14 +1,14 @@
 import { format } from "date-fns";
 import {
+	Bar,
+	BarChart,
 	CartesianGrid,
-	Line,
-	LineChart,
 	ResponsiveContainer,
 	Tooltip,
 	XAxis,
 } from "recharts";
 
-import { CustomTooltip } from "@/components/custom-tooltip";
+import { CustomTooltip } from "@/components/charts/custom-tooltip";
 
 type Props = {
 	data: {
@@ -18,10 +18,10 @@ type Props = {
 	}[];
 };
 
-export const LineVariant = ({ data }: Props) => {
+export const BarVariant = ({ data }: Props) => {
 	return (
 		<ResponsiveContainer width="100%" height={350}>
-			<LineChart data={data}>
+			<BarChart data={data}>
 				<CartesianGrid strokeDasharray="3 3" />
 				<XAxis
 					axisLine={false}
@@ -32,21 +32,9 @@ export const LineVariant = ({ data }: Props) => {
 					tickMargin={16}
 				/>
 				<Tooltip content={<CustomTooltip />} />
-				<Line
-					dot={false}
-					dataKey="income"
-					stroke="#3D82F6"
-					strokeWidth={2}
-					className="drop-shadow-sm"
-				/>
-				<Line
-					dot={false}
-					dataKey="expenses"
-					stroke="#F43F5E"
-					strokeWidth={2}
-					className="drop-shadow-sm"
-				/>
-			</LineChart>
+				<Bar dataKey="income" fill="#3D82F6" className="drop-shadow-sm" />
+				<Bar dataKey="expenses" fill="#F43F5E" className="drop-shadow-sm" />
+			</BarChart>
 		</ResponsiveContainer>
 	);
 };
