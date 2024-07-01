@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { PieVariant } from "@/components/pie-variant";
 import { RadarVariant } from "@/components/radar-variant";
+import { RadialVariant } from "@/components/radial-variant";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
 	Select,
@@ -68,6 +69,7 @@ export const SpendingPie = ({ data = [] }: Props) => {
 					<>
 						{chartType === "pie" && <PieVariant data={data} />}
 						{chartType === "radar" && <RadarVariant data={data} />}
+						{chartType === "radial" && <RadialVariant data={data} />}
 					</>
 				)}
 			</CardContent>
