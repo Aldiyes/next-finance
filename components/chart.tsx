@@ -1,6 +1,7 @@
 import { SearchIcon } from "lucide-react";
 
 import { AreaVariant } from "@/components/area-variant";
+import { BarVariant } from "@/components/bar-variant";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type Props = {
@@ -27,7 +28,10 @@ export const Chart = ({ data = [] }: Props) => {
 						</p>
 					</div>
 				) : (
-					<AreaVariant data={data} />
+					<>
+						{/* <AreaVariant data={data} /> */}
+						<BarVariant data={data} />
+					</>
 				)}
 			</CardContent>
 		</Card>
