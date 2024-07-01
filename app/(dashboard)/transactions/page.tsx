@@ -49,8 +49,12 @@ export default function TransactionsPage() {
 		return (
 			<div className="mx-auto -mt-24 w-full max-w-screen-xl pb-10">
 				<Card className="border-none drop-shadow-sm">
-					<CardHeader>
-						<Skeleton className="h-8 w-48" />
+					<CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
+						<Skeleton className="h-8 w-48 bg-neutral-200" />
+						<div className="flex flex-col items-center gap-x-2 gap-y-2 lg:flex-row">
+							<Skeleton className="h-9 w-full bg-neutral-200 lg:w-28" />
+							<Skeleton className="h-9 w-full bg-neutral-200 lg:w-28" />
+						</div>
 					</CardHeader>
 					<CardContent>
 						<div className="flex h-[500px] w-full items-center justify-center">

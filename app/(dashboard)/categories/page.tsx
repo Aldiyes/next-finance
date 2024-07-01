@@ -25,8 +25,9 @@ export default function CategoriesPage() {
 		return (
 			<div className="mx-auto -mt-24 w-full max-w-screen-xl pb-10">
 				<Card className="border-none drop-shadow-sm">
-					<CardHeader>
-						<Skeleton className="h-8 w-48" />
+					<CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
+						<Skeleton className="h-8 w-48 bg-neutral-200" />
+						<Skeleton className="h-8 w-28 bg-neutral-200" />
 					</CardHeader>
 					<CardContent>
 						<div className="flex h-[500px] w-full items-center justify-center">
