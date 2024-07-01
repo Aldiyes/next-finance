@@ -194,7 +194,7 @@ const app = new Hono().get(
 				remainingChange,
 				incomeAmount: currentPeriod.income,
 				incomeChange,
-				exprensesAmount: currentPeriod.expenses,
+				expensesAmount: currentPeriod.expenses,
 				expensesChange,
 				categories: finalCategories,
 				days,
